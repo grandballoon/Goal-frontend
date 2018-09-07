@@ -8,7 +8,8 @@ class GoalList extends Component{
     super(props)
 
     this.state = {
-      goalArray: []
+      goalArray: [],
+      editMode: false
     }
   }
 
@@ -19,16 +20,22 @@ class GoalList extends Component{
     fetch(`${this.apiUrl}${this.props.userId}`).then(resp => resp.json()).then(data => this.setState({goalArray: data.tasks}))
   }
 
+  handleEditButton = () => {
+    this.setState(prevState => ({editMode: !prevState.editMode}))
+  }
+
+
+
   // goals = this.state.goalArray.map(goal => <Goal key={goal.id} goalData={goal} />)
 
   render(){
     return (
       <div>
-        <Button basic color='blue' style={{margin: "1%"}}>Add Goal</Button>
+        <Button onClick={this.handleEditButton} basic color='blue' style={{margin: "1%"}}>Add Goal</Button>
         <Card.Group>
         {this.state.goalArray.map(goal => <Goal key={goal.id} goalData={goal} />)}
         {/* {this.state.editMode ? goalFormCallback() : null} */}
-        <GoalForm />
+        {this.state.editMode ? <GoalForm /> : null}
         </Card.Group>
       </div>
     )

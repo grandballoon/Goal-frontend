@@ -32,8 +32,7 @@ class GoalForm extends Component {
     // this.setState({[event.target.name]: event.target.value})
   }
 
-  onChange = date => {
-    debugger
+  onChange = dueDate => {
     this.setState({ dueDate })
   }
 
@@ -44,11 +43,11 @@ class GoalForm extends Component {
         <form className="ui form" >
           <input onChange={this.handleChange} name="title" value={this.state.title} placeholder="Title" type="text"/>
           <textarea onChange={this.handleChange} name="description" value={this.state.description} placeholder="Description" type="text"/>
-          {/* <DateInput onChange={this.handleChange} name="dueDate" value={this.handleDate(this.state.dueDate)}/> */}
           <Calendar
            onChange={this.onChange}
            value={this.state.dueDate}
          />
+         <Button className="ui button" basic color="blue" type="submit">Submit</Button>
         </form>
 
       </Card>
