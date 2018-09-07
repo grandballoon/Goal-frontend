@@ -16,7 +16,8 @@ class GoalForm extends Component {
     this.state = {
       title: '',
       description: '',
-      dueDate: new Date()
+      dueDate: new Date(),
+      displayCalendar: false
     }
   }
 
@@ -32,8 +33,27 @@ class GoalForm extends Component {
     // this.setState({[event.target.name]: event.target.value})
   }
 
-  onChange = dueDate => {
-    this.setState({ dueDate })
+  changeDate = dueDate => {
+    this.setState({ dueDate, displayCalendar: false })
+  }
+
+  handleCalendarDisplay = () => {
+    if (this.state.displayCalendar) {
+      return (
+        <Calendar
+          onChange={this.changeDate}
+          value={this.state.dueDate}
+        />
+      )
+    } else {
+      return (
+        <input name="dueDate" value={this.handleDate(this.state.dueDate)}></input>
+      )
+    }
+  }
+
+  changeCalendarDisplay = (event) => {
+    this.setState({displayCalendar: true})
   }
 
   render(){
@@ -43,11 +63,10 @@ class GoalForm extends Component {
         <form className="ui form" >
           <input onChange={this.handleChange} name="title" value={this.state.title} placeholder="Title" type="text"/>
           <textarea onChange={this.handleChange} name="description" value={this.state.description} placeholder="Description" type="text"/>
-          <Calendar
-           onChange={this.onChange}
-           value={this.state.dueDate}
-         />
-         <Button className="ui button" basic color="blue" type="submit">Submit</Button>
+          <div onFocus={this.changeCalendarDisplay}>
+            {this.handleCalendarDisplay()}
+          </div>
+          <Button className="ui button" basic color="blue" type="submit">Submit</Button>
         </form>
 
       </Card>
