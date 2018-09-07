@@ -3,8 +3,6 @@ import Goal from './Goal'
 import { Card, Button } from 'semantic-ui-react'
 import GoalForm from './GoalForm'
 
-
-
 class GoalList extends Component{
   constructor(props){
     super(props)
