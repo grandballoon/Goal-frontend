@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Goal from './Goal'
 import { Card, Button } from 'semantic-ui-react'
+import GoalForm from './GoalForm'
 
 
 
@@ -28,6 +29,8 @@ class GoalList extends Component{
         <Button basic color='blue' style={{margin: "1%"}}>Add Goal</Button>
         <Card.Group>
         {this.state.goalArray.map(goal => <Goal key={goal.id} goalData={goal} />)}
+        {/* {this.state.editMode ? goalFormCallback() : null} */}
+        <GoalForm />
         </Card.Group>
       </div>
     )
