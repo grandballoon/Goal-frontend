@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SubGoal from './SubGoal'
-import { Card } from 'semantic-ui-react'
+import { Card, Button } from 'semantic-ui-react'
 
 
 class Goal extends Component {
@@ -8,10 +8,11 @@ class Goal extends Component {
     super(props)
 
     this.state = {
-      subGoals: [this.props.goalData.sub_tasks],
+      subGoals: this.props.goalData.sub_tasks,
       clicked: false
     }
   }
+
 
   handleClick = () => {
     this.setState(prevState => ({clicked: !prevState.clicked}))
@@ -21,15 +22,17 @@ class Goal extends Component {
 
   render(){
     return (
-      <div><br />
-      <Card onClick={this.handleClick}>
-        <Card.Content>
-          <Card.Header>{this.props.goalData.title}</Card.Header>
-          <Card.Description>{this.props.goalData.description}</Card.Description>
+      <div style={{margin: "1%"}}><br />
+        <Card>
+          <Card.Content>
+            <Card.Header>{this.props.goalData.title}</Card.Header>
+            <Card.Description>{this.props.goalData.description}</Card.Description>
+            <br/>
+            <Button style={{marginBottom: "3%"}} basic color='blue' onClick={this.handleClick}>{this.state.clicked ? "Hide Details" : "Show Details"}</Button>
+            {this.state.clicked ? this.showSubGoals() : null}
+          </Card.Content>
 
-        </Card.Content>
-
-      </Card>
+        </Card>
 
       </div>
     )
