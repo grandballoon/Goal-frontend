@@ -47,7 +47,7 @@ class Goal extends Component {
 
   }
 
-  showSubGoals = () =>{return this.state.subGoals.map(subGoal => (<SubGoal key={subGoal.id} subGoalData={subGoal} />))}
+  showSubGoals = () =>{return this.state.subGoals.filter(subGoal => !subGoal.completed).map(subGoal => (<SubGoal fetchSubGoals={this.fetchSubGoals} key={subGoal.id} subGoalData={subGoal} />))}
 
   subGoalForm = () => {
     return (

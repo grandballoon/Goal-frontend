@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Checkbox } from 'semantic-ui-react'
+import '../App.css'
 
 class SubGoal extends Component {
 
@@ -28,8 +29,8 @@ class SubGoal extends Component {
           <br/>
           <Card.Description>Due Date: {this.handleDate(this.props.subGoalData.due_date)}</Card.Description>
           <br/>
-          <Card.Description>{this.props.subGoalData.completed ? "Completed" : "Not Completed"}</Card.Description>
-          <br/>
+
+          <Button basic color="green">Complete</Button>
         </Card.Content>
 
         {/* <div onClick={this.handleClick}>This is a subgoal</div> */}

@@ -26,3 +26,7 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.ui.toggle.checkbox input:checked~.box:after, .ui.toggle.checkbox input:checked~label:before {
+  background-color: green !important;
+}
