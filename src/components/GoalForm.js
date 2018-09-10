@@ -17,6 +17,7 @@ class GoalForm extends Component {
       title: '',
       description: '',
       dueDate: new Date(),
+      userId: this.props.userId,
       displayCalendar: false
     }
   }
@@ -26,11 +27,8 @@ class GoalForm extends Component {
     return date.toLocaleDateString("en-US", options)
   }
 
-  handleChange = (event, {name, value}) => {
-    if (this.state.hasOwnProperty(name)) {
-      console.log(event.target)
-    }
-    // this.setState({[event.target.name]: event.target.value})
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value})
   }
 
   changeDate = dueDate => {
@@ -56,11 +54,27 @@ class GoalForm extends Component {
     this.setState({displayCalendar: true})
   }
 
-  render(){
+  handleSubmit = (event) => {
+    event.preventDefault()
+    let apiUrl = 'http://localhost:3000/api/v1/tasks'
 
+    let formBody = {"title": `${this.state.title}`, "description": `${this.state.description}`, "due_date": `${this.state.dueDate}`, "user_id": `${this.state.userId}`}
+    let configObj = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(formBody)}
+
+    fetch(apiUrl, configObj).then(resp => resp.json()).then(data => this.props.fetchGoals())
+    this.setState({
+      title: '',
+      description: '',
+      dueDate: new Date(),
+      userId: this.props.userId,
+      displayCalendar: false
+    })
+  }
+
+  render(){
     return(
       <Card>
-        <form className="ui form" >
+        <form className="ui form" onSubmit={this.handleSubmit}>
           <input onChange={this.handleChange} name="title" value={this.state.title} placeholder="Title" type="text"/>
           <textarea onChange={this.handleChange} name="description" value={this.state.description} placeholder="Description" type="text"/>
           <div onFocus={this.changeCalendarDisplay}>

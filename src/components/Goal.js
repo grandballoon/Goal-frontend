@@ -13,6 +13,12 @@ class Goal extends Component {
     }
   }
 
+  handleDate = (date) => {
+    let event = new Date(date)
+    let options = {weekday: "long", year: "numeric", month: "long", day: "numeric"}
+    return event.toLocaleDateString("en-US", options)
+  }
+
 
   handleClick = () => {
     this.setState(prevState => ({clicked: !prevState.clicked}))
@@ -26,6 +32,7 @@ class Goal extends Component {
         <Card>
           <Card.Content>
             <Card.Header>{this.props.goalData.title}</Card.Header>
+            <Card.Meta>Due Date: {this.handleDate(this.props.goalData.due_date)}</Card.Meta>
             <Card.Description>{this.props.goalData.description}</Card.Description>
             <br/>
             <Button style={{marginBottom: "3%"}} basic color='blue' onClick={this.handleClick}>{this.state.clicked ? "Hide Details" : "Show Details"}</Button>

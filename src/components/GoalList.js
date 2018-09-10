@@ -17,6 +17,10 @@ class GoalList extends Component{
   apiUrl = 'http://localhost:3000/api/v1/users/'
 
   componentDidMount(){
+    this.fetchGoals()
+  }
+
+  fetchGoals = () => {
     fetch(`${this.apiUrl}${this.props.userId}`).then(resp => resp.json()).then(data => this.setState({goalArray: data.tasks}))
   }
 
@@ -33,9 +37,9 @@ class GoalList extends Component{
       <div>
         <Button onClick={this.handleEditButton} basic color='blue' style={{margin: "1%"}}>Add Goal</Button>
         <Card.Group>
-        {this.state.goalArray.map(goal => <Goal key={goal.id} goalData={goal} />)}
-        {/* {this.state.editMode ? goalFormCallback() : null} */}
-        {this.state.editMode ? <GoalForm /> : null}
+          {this.state.goalArray.map(goal => <Goal key={goal.id} goalData={goal} />)}
+          {/* {this.state.editMode ? goalFormCallback() : null} */}
+          {this.state.editMode ? <GoalForm userId={1} fetchGoals={this.fetchGoals}/> : null}
         </Card.Group>
       </div>
     )
