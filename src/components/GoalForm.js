@@ -72,6 +72,7 @@ class GoalForm extends Component {
       userId: this.props.userId,
       displayCalendar: false
     })
+    this.props.hideGoalForm()
   }
 
   render(){

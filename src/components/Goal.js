@@ -43,16 +43,21 @@ class Goal extends Component {
 
     this.setState({completed: true})
 
-    setTimeout(() => {fetch(apiUrl, configObj).then(resp => resp.json()).then(data => this.props.fetchGoals())}, 3200)
+    setTimeout(() => {fetch(apiUrl, configObj).then(resp => resp.json()).then(data => this.props.fetchGoals())}, 3500)
 
   }
 
   showSubGoals = () =>{return this.state.subGoals.filter(subGoal => !subGoal.completed).map(subGoal => (<SubGoal fetchSubGoals={this.fetchSubGoals} key={subGoal.id} subGoalData={subGoal} />))}
 
+
   subGoalForm = () => {
     return (
-      <SubGoalForm fetchGoals={this.fetchSubGoals} goalId={this.props.goalData.id}></SubGoalForm>
+      <SubGoalForm resetSubGoalForm={this.resetSubGoalForm} fetchGoals={this.fetchSubGoals} goalId={this.props.goalData.id}></SubGoalForm>
     )
+  }
+
+  resetSubGoalForm = () => {
+    this.setState({subGoalClicked: false })
   }
 
   subGoalButtonHandleClick = () =>{

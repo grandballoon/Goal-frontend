@@ -48,7 +48,6 @@ class SubGoalForm extends Component {
   }
 
   handleSubmit = (event) => {
-    console.log(this.state.dueDate)
     event.preventDefault()
     let taskUrl = 'http://localhost:3000/api/v1/sub_tasks'
     let data = {"task_id": `${this.props.goalId}`, "description": `${this.state.description}`, "due_date": `${this.state.dueDate}`}
@@ -57,6 +56,7 @@ class SubGoalForm extends Component {
     dueDate: new Date(),
     displayCalender: false,
     goalId: this.props.goalId}))
+    this.props.resetSubGoalForm()
   }
 
   render(){

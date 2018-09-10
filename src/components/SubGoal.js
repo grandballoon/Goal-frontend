@@ -22,14 +22,13 @@ class SubGoal extends Component {
   }
 
   handleComplete = () => {
-
-    this.setState({completed: true})
-
     let apiUrl = `http://localhost:3000/api/v1/sub_tasks/${this.props.subGoalData.id}`
     let data = {"completed": true}
     let configObj = {method: "PATCH", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)}
 
-    setTimeout(() => {fetch(apiUrl, configObj).then(resp => resp.json()).then(this.props.fetchSubGoals)}, 3200)
+    this.setState({completed: true})
+
+    setTimeout(() => {fetch(apiUrl, configObj).then(resp => resp.json()).then(this.props.fetchSubGoals)}, 3500)
   }
 
   incompleteSubGoal = () => {
@@ -45,18 +44,19 @@ class SubGoal extends Component {
     )
   }
 
-  completeSubGoal = () =>{
+  completeSubGoal = () => {
+    console.log(this.state)
     return (
-      <Image src={require('../images/success.gif')}/>
+      <Image src={require("../images/success.gif")}/>
     )
 
   }
 
-  render(){
+  render() {
     return (
       <Card>
         <Card.Content>
-          {this.state.complete ? this.completeSubGoal() : this.incompleteSubGoal()}
+          {this.state.completed ? this.completeSubGoal() : this.incompleteSubGoal()}
         </Card.Content>
       </Card>
     )

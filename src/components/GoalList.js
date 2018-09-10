@@ -9,7 +9,7 @@ class GoalList extends Component{
 
     this.state = {
       goalArray: [],
-      editMode: false
+      renderForm: false
     }
   }
 
@@ -29,12 +29,12 @@ class GoalList extends Component{
   }
 
   handleEditButton = () => {
-    this.setState(prevState => ({editMode: !prevState.editMode}))
+    this.setState(prevState => ({renderForm: !prevState.renderForm}))
   }
 
-
-
-  // goals = this.state.goalArray.map(goal => <Goal key={goal.id} goalData={goal} />)
+  hideGoalForm = () => {
+    this.setState({renderForm: false})
+  }
 
   render(){
     return (
@@ -43,7 +43,7 @@ class GoalList extends Component{
         <Card.Group>
           {this.filterGoals(this.state.goalArray).map(goal => <Goal fetchGoals={this.fetchGoals} key={goal.id} goalData={goal} />)}
           {/* {this.state.editMode ? goalFormCallback() : null} */}
-          {this.state.editMode ? <GoalForm userId={1} fetchGoals={this.fetchGoals}/> : null}
+          {this.state.renderForm ? <GoalForm hideGoalForm={this.hideGoalForm} userId={1} fetchGoals={this.fetchGoals}/> : null}
         </Card.Group>
       </div>
     )
