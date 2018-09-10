@@ -32,7 +32,9 @@ class GoalForm extends Component {
   }
 
   changeDate = dueDate => {
+    console.log(dueDate)
     this.setState({ dueDate, displayCalendar: false })
+
   }
 
   handleCalendarDisplay = () => {
@@ -77,7 +79,7 @@ class GoalForm extends Component {
         <form className="ui form" onSubmit={this.handleSubmit}>
           <input onChange={this.handleChange} name="title" value={this.state.title} placeholder="Title" type="text"/>
           <textarea onChange={this.handleChange} name="description" value={this.state.description} placeholder="Description" type="text"/>
-          <div onFocus={this.changeCalendarDisplay}>
+          <div onClick={this.changeCalendarDisplay}>
             {this.handleCalendarDisplay()}
           </div>
           <Button className="ui button" basic color="blue" type="submit">Submit</Button>
