@@ -67,7 +67,7 @@ class SubGoalForm extends Component {
           <div onClick={this.changeCalendarDisplay}>
             {this.handleCalendarDisplay()}
           </div>
-          <Button className="ui button" basic color="blue" type="submit">Submit</Button>
+          <Button className="ui button" basic color="green" type="submit">Submit</Button>
         </form>
       </div>
     )

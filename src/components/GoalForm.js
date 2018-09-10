@@ -64,6 +64,7 @@ class GoalForm extends Component {
     let configObj = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(formBody)}
 
     fetch(apiUrl, configObj).then(resp => resp.json()).then(data => this.props.fetchGoals())
+
     this.setState({
       title: '',
       description: '',
@@ -82,7 +83,7 @@ class GoalForm extends Component {
           <div onClick={this.changeCalendarDisplay}>
             {this.handleCalendarDisplay()}
           </div>
-          <Button className="ui button" basic color="blue" type="submit">Submit</Button>
+          <Button className="ui button" basic color="green" type="submit">Submit</Button>
         </form>
 
       </Card>
