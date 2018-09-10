@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button, Checkbox } from 'semantic-ui-react'
+import { Card, Button, Checkbox, Image } from 'semantic-ui-react'
 import '../App.css'
 
 class SubGoal extends Component {
@@ -22,29 +22,42 @@ class SubGoal extends Component {
   }
 
   handleComplete = () => {
-    console.log(this.props.subGoalData.id)
+
     this.setState({completed: true})
 
     let apiUrl = `http://localhost:3000/api/v1/sub_tasks/${this.props.subGoalData.id}`
     let data = {"completed": true}
-    let configObj = {method: "PATCH", headers: {"Content-Type": "application/son"}, body: JSON.stringify(data)}
+    let configObj = {method: "PATCH", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)}
 
-    setTimeout(() => {fetch(apiUrl, configObj).then(resp => resp.json()).then(console.log).then(data => this.props.fetchSubGoals())}, 3200)
+    setTimeout(() => {fetch(apiUrl, configObj).then(resp => resp.json()).then(this.props.fetchSubGoals)}, 3200)
+  }
+
+  incompleteSubGoal = () => {
+    return (
+      <div>
+        <Card.Description>{this.props.subGoalData.description}</Card.Description>
+        <br/>
+        <Card.Description>Due Date: {this.handleDate(this.props.subGoalData.due_date)}</Card.Description>
+        <br/>
+
+        <Button basic color="green" onClick={this.handleComplete}>Complete</Button>
+      </div>
+    )
+  }
+
+  completeSubGoal = () =>{
+    return (
+      <Image src={require('../images/success.gif')}/>
+    )
+
   }
 
   render(){
     return (
       <Card>
         <Card.Content>
-          <Card.Description>{this.props.subGoalData.description}</Card.Description>
-          <br/>
-          <Card.Description>Due Date: {this.handleDate(this.props.subGoalData.due_date)}</Card.Description>
-          <br/>
-
-          <Button basic color="green" onClick={this.handleComplete}>Complete</Button>
+          {this.state.complete ? this.completeSubGoal() : this.incompleteSubGoal()}
         </Card.Content>
-
-        {/* <div onClick={this.handleClick}>This is a subgoal</div> */}
       </Card>
     )
   }
