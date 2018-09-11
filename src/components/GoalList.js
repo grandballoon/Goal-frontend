@@ -15,7 +15,8 @@ class GoalList extends Component{
     }
   }
 
-  urlArray = ['../images/andy.gif', '../images/brad.gif', '../images/cheater.gif', '../images/michelle.gif', '../images/shia1.gif', '../images/jon.gif']
+
+  urlArray = ['andy.gif', 'brad.gif', 'cheater.gif', 'michelle.gif', 'shia1.gif', 'jon.gif']
 
   apiUrl = 'http://localhost:3000/api/v1/users/'
 
@@ -54,7 +55,8 @@ class GoalList extends Component{
     let url= this.urlArray[index]
     return(
       // <Image src={require(url)}/>
-      <Image src={require('../images/andy.gif')}/>
+      // <Image src={require('../images/andy.gif')}/>
+      <Image src={require(`../images/${url}`)}/>
 
     )
   }
