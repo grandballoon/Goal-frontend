@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import SubGoal from './SubGoal'
 import { Card, Button, Image } from 'semantic-ui-react'
 import SubGoalForm from './SubGoalForm'
+import SortableSubGoal from './SortableSubGoal'
+import SortableSubGoalList from './SortableSubGoalList'
+import {arrayMove} from 'react-sortable-hoc'
 
 
 class Goal extends Component {
@@ -19,6 +22,10 @@ class Goal extends Component {
   componentDidMount(){
     this.fetchSubGoals()
   }
+
+  onSortEnd = ({oldIndex, newIndex}) => {
+  this.setState({subGoals: arrayMove(this.state.subGoals, oldIndex, newIndex)})
+}
 
   fetchSubGoals = () => {
     let subGoalUrl = `http://localhost:3000/api/v1/tasks/${this.props.goalData.id}`
@@ -47,7 +54,13 @@ class Goal extends Component {
 
   }
 
-  showSubGoals = () =>{return this.state.subGoals.filter(subGoal => !subGoal.completed).map(subGoal => (<SubGoal fetchSubGoals={this.fetchSubGoals} key={subGoal.id} subGoalData={subGoal} />))}
+  // showSubGoals = () =>{return this.state.subGoals.filter(subGoal => !subGoal.completed).map((subGoal, index) => (<SortableSubGoal fetchSubGoals={this.fetchSubGoals} key={subGoal.id} index={index} subGoalData={subGoal} />))}
+
+  showSubGoals = () => {
+    const incompleteSubGoals = this.state.subGoals.filter(subGoal => !subGoal.completed)
+
+    return <SortableSubGoalList onSortEnd={this.onSortEnd} fetchSubGoals={this.fetchSubGoals} incompleteSubGoals={incompleteSubGoals} />
+  }
 
 
   subGoalForm = () => {

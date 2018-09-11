@@ -4,7 +4,7 @@ import '../App.css'
 
 class SubGoal extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       completed: this.props.subGoalData.completed
@@ -45,7 +45,6 @@ class SubGoal extends Component {
   }
 
   completeSubGoal = () => {
-    console.log(this.state)
     return (
       <Image src={require("../images/success.gif")}/>
     )
