@@ -127,7 +127,7 @@ class Goal extends Component {
     )
   }
 
-  render(){
+  render() {
     return (
       <div style={{margin: "1%"}}><br />
         <Card>

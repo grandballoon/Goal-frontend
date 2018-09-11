@@ -20,7 +20,7 @@ class GoalList extends Component{
 
   apiUrl = 'http://localhost:3000/api/v1/users/'
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchGoals()
   }
 
@@ -53,11 +53,8 @@ class GoalList extends Component{
   renderMotivator = () => {
     let index = Math.floor(Math.random() * this.urlArray.length)
     let url= this.urlArray[index]
-    return(
-      // <Image src={require(url)}/>
-      // <Image src={require('../images/andy.gif')}/>
+    return (
       <Image src={require(`../images/${url}`)}/>
-
     )
   }
 
@@ -66,7 +63,7 @@ class GoalList extends Component{
     setTimeout(() => {this.setState({motivateMode: false})}, 3500)
   }
 
-  render(){
+  render() {
     return (
       <div>
         <Button onClick={this.handleEditButton} basic color='green' style={{margin: "1%"}}>Add Goal</Button>
