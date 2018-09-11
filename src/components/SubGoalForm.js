@@ -50,7 +50,7 @@ class SubGoalForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     let taskUrl = 'http://localhost:3000/api/v1/sub_tasks'
-    let data = {"task_id": `${this.props.goalId}`, "description": `${this.state.description}`, "due_date": `${this.state.dueDate}`}
+    let data = {"task_id": `${this.props.goalId}`, "description": `${this.state.description}`, "due_date": `${this.state.dueDate}`, "order": `${this.props.subGoalArrayLength + 1}`}
     let configObj = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data) }
     fetch(taskUrl, configObj).then(resp => this.props.fetchGoals()).then(r => this.setState({description: '',
     dueDate: new Date(),

@@ -24,12 +24,35 @@ class Goal extends Component {
   }
 
   onSortEnd = ({oldIndex, newIndex}) => {
-  this.setState({subGoals: arrayMove(this.state.subGoals, oldIndex, newIndex)})
+    // console.log(this.state.subGoals);
+
+    let selectSubGoal = this.state.subGoals[oldIndex]
+
+    this.setState({subGoals: arrayMove(this.state.subGoals, oldIndex, newIndex)}, () => {
+
+      let updatedSubGoals = this.state.subGoals
+
+      for (let i = 0; i < updatedSubGoals.length; i++) {
+        updatedSubGoals[i].order = i + 1
+        let apiUrl = `http://localhost:3000/api/v1/sub_tasks/${updatedSubGoals[i].id}`
+        let configObj = {method: "PATCH", headers: {"Content-Type": "application/json"}, body: JSON.stringify(updatedSubGoals[i])}
+        fetch(apiUrl, configObj).then(resp => resp.json()).then(console.log)
+      }
+
+      console.log(updatedSubGoals)
+      console.log('--------')
+
+      // let apiUrl = `http://localhost:3000/api/v1/tasks/${this.props.goalData.id}`
+      // let formBody = {"sub_tasks": updatedSubGoals}
+      // let configObj = {method: "PATCH", headers: {"Content-Type": "application/json"}, body: JSON.stringify(formBody)}
+      // fetch(apiUrl, configObj).then(resp => resp.json()).then(console.log)
+
+    })
 }
 
   fetchSubGoals = () => {
     let subGoalUrl = `http://localhost:3000/api/v1/tasks/${this.props.goalData.id}`
-    fetch(subGoalUrl).then(resp => resp.json()).then(data => this.setState({subGoals: data.sub_tasks}))
+    fetch(subGoalUrl).then(resp => resp.json()).then(data => data.sub_tasks.sort((a, b) => a.order - b.order)).then(sortedSubGoals => this.setState({subGoals: sortedSubGoals}))
   }
 
   handleDate = (date) => {
@@ -65,7 +88,7 @@ class Goal extends Component {
 
   subGoalForm = () => {
     return (
-      <SubGoalForm resetSubGoalForm={this.resetSubGoalForm} fetchGoals={this.fetchSubGoals} goalId={this.props.goalData.id}></SubGoalForm>
+      <SubGoalForm resetSubGoalForm={this.resetSubGoalForm} fetchGoals={this.fetchSubGoals} goalId={this.props.goalData.id} subGoalArrayLength={this.state.subGoals.length}></SubGoalForm>
     )
   }
 
