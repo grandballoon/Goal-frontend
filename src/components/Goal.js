@@ -32,15 +32,13 @@ class Goal extends Component {
 
       let updatedSubGoals = this.state.subGoals
 
-      for (let i = 0; i < updatedSubGoals.length; i++) {
-        updatedSubGoals[i].order = i + 1
-        let apiUrl = `http://localhost:3000/api/v1/sub_tasks/${updatedSubGoals[i].id}`
-        let configObj = {method: "PATCH", headers: {"Content-Type": "application/json"}, body: JSON.stringify(updatedSubGoals[i])}
-        fetch(apiUrl, configObj).then(resp => resp.json()).then(console.log)
-      }
+      updatedSubGoals.forEach((subGoal, index) => {
+        subGoal.order = index + 1
+        let apiUrl = `http://localhost:3000/api/v1/sub_tasks/${subGoal.id}`
+        let configObj = {method: "PATCH", headers: {"Content-Type": "application/json"}, body: JSON.stringify(subGoal)}
+        fetch(apiUrl, configObj).then(resp => resp.json())
+      })
 
-      console.log(updatedSubGoals)
-      console.log('--------')
 
       // let apiUrl = `http://localhost:3000/api/v1/tasks/${this.props.goalData.id}`
       // let formBody = {"sub_tasks": updatedSubGoals}
