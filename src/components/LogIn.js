@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Message } from 'semantic-ui-react'
 
 class LogIn extends Component {
   constructor(props){
     super(props)
     this.state = {
-      user_name: ''
+      user_name: '',
+      displayErrorMessage: false
     }
   }
 
@@ -26,7 +27,8 @@ class LogIn extends Component {
     if (response === "success"){
       this.props.history.push('/goals')
     }else{
-      alert("log-in failed")
+      // alert("log-in failed")
+      this.setState({displayErrorMessage: true})
     }
   }
 
@@ -40,12 +42,13 @@ class LogIn extends Component {
   render(){
   return (<div style={{paddingLeft: "30%", paddingRight: "30%"}}>
     <h1> Log In </h1>
-    <Form onSubmit={this.handleSubmit}>
+    <Form error onSubmit={this.handleSubmit}>
     <Form.Field>
       <label>User Name:</label>
       <input name='user_name' onChange={this.handleChange} value={this.state.user_name} placeholder='User Name' />
     </Form.Field>
     <Button type='submit'>Submit</Button>
+    {this.state.displayErrorMessage ? <Message error header='User Name Not Found' content="Please enter a valid user name" /> : null}
   </Form>
 </div>)
   }
