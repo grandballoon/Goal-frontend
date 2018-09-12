@@ -45,7 +45,7 @@ class GoalList extends Component{
       <Card.Group>
         {this.filterGoals(this.state.goalArray).map(goal => <Goal fetchGoals={this.fetchGoals} key={goal.id} goalData={goal} />)}
         {/* {this.state.editMode ? goalFormCallback() : null} */}
-        {this.state.renderForm ? <GoalForm hideGoalForm={this.hideGoalForm} userId={1} fetchGoals={this.fetchGoals}/> : null}
+        {this.state.renderForm ? <GoalForm hideGoalForm={this.hideGoalForm} userId={this.props.userId} fetchGoals={this.fetchGoals}/> : null}
       </Card.Group>
     )
   }

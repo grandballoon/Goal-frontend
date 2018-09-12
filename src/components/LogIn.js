@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 
-class SignUp extends Component {
+class LogIn extends Component {
   constructor(props){
-  super(props)
-  this.state = {
-    user_name: '',
-    email: '',
-    phone_number: ''
-  }
+    super(props)
+    this.state = {
+      user_name: ''
+    }
   }
 
   handleChange = (event) => {
@@ -30,18 +28,10 @@ class SignUp extends Component {
       <label>User Name:</label>
       <input name='user_name' onChange={this.handleChange} value={this.state.user_name} placeholder='User Name' />
     </Form.Field>
-    <Form.Field>
-      <label>Email:</label>
-      <input name='email' onChange={this.handleChange} value={this.state.email} placeholder='Email' />
-    </Form.Field>
-    <Form.Field>
-      <label>Phone Number:</label>
-      <input name='phone_number' value={this.state.phone_number} placeholder='555-5555' onChange={this.handleChange}/>
-    </Form.Field>
     <Button type='submit'>Submit</Button>
   </Form>
 </div>)
   }
 }
 
-export default SignUp
+export default LogIn
