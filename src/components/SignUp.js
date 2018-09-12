@@ -20,7 +20,7 @@ class SignUp extends Component {
     let formBody= this.state
 
     let configObj = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(formBody)}
-    fetch(apiUrl, configObj).then(resp => resp.json()).then(user => this.props.handleLogIn(user)).then( () => this.props.history.push('/goals'))
+    fetch(apiUrl, configObj).then(resp => resp.json()).then(console.log)
   }
 
   render(){

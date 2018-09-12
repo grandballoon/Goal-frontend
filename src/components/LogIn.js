@@ -13,16 +13,33 @@ class LogIn extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  handleUser = (user) => {
+    if (user != null){
+      this.props.handleLogIn(user)
+      return "success"
+    }else {
+      return "failure"
+    }
+  }
+
+  handleErrors = (response) => {
+    if (response === "success"){
+      this.props.history.push('/goals')
+    }else{
+      alert("log-in failed")
+    }
+  }
+
   handleSubmit = () => {
     const apiUrl='http://localhost:3000/api/v1/users'
     let formBody= this.state
 
-    let configObj = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(formBody)}
-    fetch(apiUrl, configObj).then(resp => resp.json()).then(user => this.props.handleLogIn(user)).then( () => this.props.history.push('/goals'))
+    fetch(apiUrl).then(resp => resp.json()).then(data => data.find(user => user.user_name === this.state.user_name)).then(user => this.handleUser(user)).then(response => this.handleErrors(response))
   }
 
   render(){
   return (<div style={{paddingLeft: "30%", paddingRight: "30%"}}>
+    <h1> Log In </h1>
     <Form onSubmit={this.handleSubmit}>
     <Form.Field>
       <label>User Name:</label>

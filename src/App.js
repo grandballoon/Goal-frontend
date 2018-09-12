@@ -32,7 +32,7 @@ class App extends Component {
         <React.Fragment>
           <Header />
           <Route path="/signup" render={(props) => <SignUp {...props} handleLogIn={this.handleLogIn} />} />
-          <Route path="/login" render={(props) => <LogIn {...props} handleLogIn={this.handleLogIn} />} />
+          <Route exact path="/" render={(props) => <LogIn {...props} handleLogIn={this.handleLogIn} />} />
           <Route path="/goals" render={(props) => <GoalList {...props} userId={this.state.userInfo.id} />} />
       </React.Fragment>
       </Router>
