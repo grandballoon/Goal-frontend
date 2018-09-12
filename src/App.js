@@ -25,6 +25,7 @@ class App extends Component {
 
   handleLogIn = (user) => {
     this.setState({userInfo: user})
+    return user
   }
 
   logOut = () => {

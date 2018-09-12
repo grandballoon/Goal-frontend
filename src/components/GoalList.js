@@ -81,6 +81,7 @@ class GoalList extends Component{
         <Button onClick={this.toggleMotivator} basic color='red' style={{margin: "1%"}}>Motivate Me</Button>
         <br/>
         {this.state.motivateMode ? this.renderMotivator() : this.renderCards()}
+        <br/>
         <Button onClick={this.handleLogOut} basic color='green' style={{margin: "1%"}}>Log Out</Button>
       </div>
     )
