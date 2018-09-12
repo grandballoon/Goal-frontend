@@ -11,18 +11,24 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      userInfo: null
+      userInfo: {id: null}
     }
   }
+
+
+  // componentDidMount = () => {
+  //   if (!this.userInfo.id) {
+  //     // this.fetchGoals()
+  //     this.props.history.push('/')
+  //   }
+  // }
 
   handleLogIn = (user) => {
     this.setState({userInfo: user})
   }
 
-  redirect = () => {
-    console.log('hit redirect function')
-    console.log("-----------")
-    return <Redirect to='/goals' />
+  logOut = () => {
+    this.setState({userInfo: {id: null}})
   }
 
 
@@ -33,7 +39,7 @@ class App extends Component {
           <Header />
           <Route path="/signup" render={(props) => <SignUp {...props} handleLogIn={this.handleLogIn} />} />
           <Route exact path="/" render={(props) => <LogIn {...props} handleLogIn={this.handleLogIn} />} />
-          <Route path="/goals" render={(props) => <GoalList {...props} userId={this.state.userInfo.id} />} />
+          <Route path="/goals" render={(props) => <GoalList {...props} userId={this.state.userInfo.id} logOut={this.logOut} />} />
       </React.Fragment>
       </Router>
     );

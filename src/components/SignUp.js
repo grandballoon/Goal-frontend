@@ -54,9 +54,11 @@ class SignUp extends Component {
       <label>Phone Number:</label>
       <input name='phone_number' value={this.state.phone_number} placeholder='555-5555' onChange={this.handleChange}/>
     </Form.Field>
-    <Button type='submit'>Submit</Button>
+    <Button basic color='green' type='submit'>Submit</Button>
     {this.state.errors ? <Message error header='Sign Up Failed' content={this.state.errors} /> : null}
   </Form>
+  <br/>
+  <Button basic color='green' onClick={() => this.props.history.push('/')}>Go to Log In</Button>
 </div>)
   }
 }

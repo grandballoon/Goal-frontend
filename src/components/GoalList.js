@@ -16,16 +16,20 @@ class GoalList extends Component{
   }
 
 
-  urlArray = ['andy.gif', 'brad.gif', 'cheater.gif', 'michelle.gif', 'shia1.gif', 'jon.gif']
+  urlArray = ['andy.gif', 'brad.gif', 'cheater.gif', 'michelle.gif', 'shia1.gif', 'jon.gif', 'cat_hang_in_there.gif', 'john_cena.gif', 'leslie_knope_fierce.gif', 'the_water_boy.webp', 'arnold.webp']
 
   apiUrl = 'http://localhost:3000/api/v1/users/'
 
   componentDidMount() {
-    this.fetchGoals()
+    if (this.props.userId) {
+      this.fetchGoals()
+    } else {
+      this.props.history.push('/')
+    }
   }
 
   fetchGoals = () => {
-    fetch(`${this.apiUrl}${this.props.userId}`).then(resp => resp.json()).then(data => this.setState({goalArray: data.tasks})).then(console.log)
+    fetch(`${this.apiUrl}${this.props.userId}`).then(resp => resp.json()).then(data => this.setState({goalArray: data.tasks}))
   }
 
   filterGoals = (goals) => {
@@ -54,13 +58,20 @@ class GoalList extends Component{
     let index = Math.floor(Math.random() * this.urlArray.length)
     let url= this.urlArray[index]
     return (
-      <Image src={require(`../images/${url}`)}/>
+      <div style={{margin: "1%"}}>
+        <Image src={require(`../images/${url}`)}/>
+      </div>
     )
   }
 
   toggleMotivator = () => {
     this.setState({motivateMode: true})
-    setTimeout(() => {this.setState({motivateMode: false})}, 3500)
+    setTimeout(() => {this.setState({motivateMode: false})}, 4000)
+  }
+
+  handleLogOut = () => {
+    this.props.logOut()
+    this.props.history.push('/')
   }
 
   render() {
@@ -70,6 +81,7 @@ class GoalList extends Component{
         <Button onClick={this.toggleMotivator} basic color='red' style={{margin: "1%"}}>Motivate Me</Button>
         <br/>
         {this.state.motivateMode ? this.renderMotivator() : this.renderCards()}
+        <Button onClick={this.handleLogOut} basic color='green' style={{margin: "1%"}}>Log Out</Button>
       </div>
     )
   }

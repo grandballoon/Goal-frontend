@@ -47,9 +47,11 @@ class LogIn extends Component {
       <label>User Name:</label>
       <input name='user_name' onChange={this.handleChange} value={this.state.user_name} placeholder='User Name' />
     </Form.Field>
-    <Button type='submit'>Submit</Button>
+    <Button basic color='green' type='submit'>Submit</Button>
     {this.state.displayErrorMessage ? <Message error header='User Name Not Found' content="Please enter a valid user name" /> : null}
   </Form>
+  <h3>Don't have an account?</h3>
+  <Button basic color='green' onClick={() => this.props.history.push('/signup')}>Sign Up</Button>
 </div>)
   }
 }
