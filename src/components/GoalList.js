@@ -25,7 +25,7 @@ class GoalList extends Component{
   }
 
   fetchGoals = () => {
-    fetch(`${this.apiUrl}${this.props.userId}`).then(resp => resp.json()).then(data => this.setState({goalArray: data.tasks}))
+    fetch(`${this.apiUrl}${this.props.userId}`).then(resp => resp.json()).then(data => this.setState({goalArray: data.tasks})).then(console.log)
   }
 
   filterGoals = (goals) => {
