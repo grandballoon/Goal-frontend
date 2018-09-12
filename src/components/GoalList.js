@@ -65,7 +65,7 @@ class GoalList extends Component{
 
   render() {
     return (
-      <div>
+      <div style={{marginTop: "50px"}}>
         <Button onClick={this.handleEditButton} basic color='green' style={{margin: "1%"}}>Add Goal</Button>
         <Button onClick={this.toggleMotivator} basic color='red' style={{margin: "1%"}}>Motivate Me</Button>
         <br/>
