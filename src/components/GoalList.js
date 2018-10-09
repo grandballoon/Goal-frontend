@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Goal from './Goal'
 import { Card, Button, Image } from 'semantic-ui-react'
 import GoalForm from './GoalForm'
-import Iframe from 'react-iframe'
 
 class GoalList extends Component{
   constructor(props){

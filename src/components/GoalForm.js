@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
 import { Card, Button } from 'semantic-ui-react'
-import {
-  DateInput,
-  TimeInput,
-  DateTimeInput,
-  DatesRangeInput
-} from 'semantic-ui-calendar-react'
 import Calendar from 'react-calendar';
 
 class GoalForm extends Component {

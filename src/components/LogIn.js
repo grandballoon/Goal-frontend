@@ -27,15 +27,13 @@ class LogIn extends Component {
     if (response === "success"){
       this.props.history.push('/goals')
     }else{
-      // alert("log-in failed")
       this.setState({displayErrorMessage: true})
     }
   }
 
   handleSubmit = () => {
     const apiUrl='http://localhost:3000/api/v1/users'
-    let formBody= this.state
-
+    
     fetch(apiUrl).then(resp => resp.json()).then(data => data.find(user => user.user_name === this.state.user_name)).then(user => this.handleUser(user)).then(response => this.handleErrors(response))
   }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 // import List from './List'
 import { SortableContainer } from 'react-sortable-hoc'
 import SortableSubGoal from './SortableSubGoal'

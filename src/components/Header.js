@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import React from 'react'
 
 const Header = (props) => {
   const textAlignment = {color: 'white', width:'auto', padding: 10, margin: 10}

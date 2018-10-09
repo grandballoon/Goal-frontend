@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button, Checkbox, Image } from 'semantic-ui-react'
+import { Card, Button, Image } from 'semantic-ui-react'
 import '../App.css'
 
 class SubGoal extends Component {
